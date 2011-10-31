@@ -6,21 +6,26 @@
 </head>
 <body>
 
-<span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span>
+<span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span>
 
 <script>
 	var M = {}, V = {}, C = {};
 	
 	M.strip = function(number){
-		// allow only two numerics, pad with zero if needed, return
+		return Math.floor(number);
+	};
+	
+	M.pad = function(number) {
+		return number < 10 ? '0' + number : number;
 	};
 	
 	M.getDiff = function(now, to){
 		var diff = {};
 		diff.ms = to - now;
-		diff.days = 	diff.ms / 1000 / 60 / 24 / 365;
-		diff.hours = 	diff.days / 24;
-		diff.minutes = 	diff.hours / 60;
+		diff.days = 	M.strip( diff.ms / 1000 / 60 / 60 / 24 );
+		diff.hours = 	M.strip( diff.ms / 1000 / 60 / 60 - (diff.days * 24) );
+		diff.minutes = 	M.strip( diff.ms / 1000 / 60 - 		(diff.days * 24 * 60) - (diff.hours * 60) );
+		diff.seconds = 	M.strip( diff.ms / 1000 - 			(diff.days * 24 * 60 * 60) - (diff.hours * 60 * 60) - (diff.minutes * 60) );
 		
 			
 		return diff;
@@ -45,17 +50,19 @@
 	V.els = {
 		'days': 	document.getElementById('days'),
 		'hours': 	document.getElementById('hours'),
-		'minutes': 	document.getElementById('minutes')
+		'minutes': 	document.getElementById('minutes'),
+		'seconds': 	document.getElementById('seconds')
 	};
 	
 	V.updateCountdown = function(timeLeft){
-		V.els.days.innerHTML = timeLeft.days;
-		V.els.hours.innerHTML = timeLeft.hours;
-		V.els.minutes.innerHTML = timeLeft.minutes;
+		V.els.days.innerHTML = M.pad( timeLeft.days );
+		V.els.hours.innerHTML = M.pad( timeLeft.hours );
+		V.els.minutes.innerHTML = M.pad( timeLeft.minutes );
+		V.els.seconds.innerHTML = M.pad( timeLeft.seconds );
 	};
 
 	function update(){
-		var diff = M.getDiff( +new Date(), M.gameTimes[0]);
+		var diff = M.getDiff( +new Date(), M.gameTimes[0] );
 		if(diff.ms <= 0) C.redirectToGamePage();
 		
 		V.updateCountdown( diff	);
