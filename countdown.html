@@ -56,7 +56,7 @@
 
 	function update(){
 		var diff = M.getDiff( +new Date(), M.gameTimes[0]);
-		if(diff.ms <= 0) C.redirectToGamePage;
+		if(diff.ms <= 0) C.redirectToGamePage();
 		
 		V.updateCountdown( diff	);
 	}
