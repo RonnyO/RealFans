@@ -11,12 +11,6 @@
 <script>
 	var M = {}, V = {}, C = {};
 	
-	V.els = {
-		'days': 	document.getElementById('days'),
-		'hours': 	document.getElementById('hours'),
-		'minutes': 	document.getElementById('minutes')
-	};
-	
 	M.strip = function(number){
 		// allow only two numerics, pad with zero if needed, return
 	};
@@ -43,6 +37,16 @@
 		+new Date(2011, 12 - 1, 11, 20, 30),
 		+new Date(2011, 12 - 1, 18, 20, 30)
 	];
+	
+	C.redirectToGamePage = function(){
+		document.location = 'http://google.com';
+	};
+	
+	V.els = {
+		'days': 	document.getElementById('days'),
+		'hours': 	document.getElementById('hours'),
+		'minutes': 	document.getElementById('minutes')
+	};
 	
 	V.updateCountdown = function(timeLeft){
 		V.els.days.innerHTML = timeLeft.days;
