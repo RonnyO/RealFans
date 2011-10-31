@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+
+<span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span>
+
+<script>
+	var M = {}, V = {}, C = {};
+	
+	M.strip = function(number){
+		// allow only two numerics, pad with zero if needed, return
+	};
+	
+	M.getDiff = function(now, to){
+		var diff = {};
+		diff.ms = to - now;
+		diff.days = diff.ms / 365;
+		diff.hours = diff.days / 24;
+		diff.minutes = diff.hours / 60;
+			
+		return msDiff;
+	}
+	
+	M.gameTimes = [
+		+new Date(2011, 11 - 1, 2, 20, 30),
+		+new Date(2011, 11 - 1, 6, 20, 30),
+		+new Date(2011, 11 - 1, 19, 20, 30),
+		+new Date(2011, 11 - 1, 22, 20, 30),
+		+new Date(2011, 11 - 1, 27, 20, 30),
+		+new Date(2011, 12 - 1, 04, 20, 30),
+		+new Date(2011, 12 - 1, 07, 20, 30),
+		+new Date(2011, 12 - 1, 11, 20, 30),
+		+new Date(2011, 12 - 1, 18, 20, 30)
+	];
+	
+	console.log(M.gameTimes);
+	
+	var times = [19283798172983, 123981762874, 123876342857921843, 1294872893579012843];
+	var date = function(){
+		
+	};
+	
+	/*function update(){
+		M.
+	}*/
+</script>
+</body>
+</html>
+
+<!--
+dates = [19283798172983, 123981762874, 123876342857921843, 1294872893579012843]
+
+now - dates[0];
+
+now / 60
+now / 60 / 60
+-->
