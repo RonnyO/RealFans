@@ -68,6 +68,15 @@
 		V.updateCountdown( diff	);
 	}
 	
+	/* Init */
+	var games = M.gameTimes;
+	while(games.length) {
+		if( games[0] < +new Date() ) {
+			games.shift()
+		} else {
+			break;
+		}
+	}
 	setInterval(update, 1000);
 </script>
 </body>
