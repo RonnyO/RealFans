@@ -4,12 +4,13 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<style>
-		body {font-family: sans-serif;}
+		body {font-family: sans-serif; margin: 2px;}
 		.notplaying #ingame, .playing #countdown {display: none;}
 		.playing #ingame, .notplaying #countdown {display: block;}
 		
 		#countdown {
 			font-size: 18px;
+			text-align: center;
 		}
 		
 		#countdown .intro {
@@ -21,7 +22,7 @@
 			margin: 0;
 		}
 		
-		#countdown .time {
+		#countdown #timer {
 			margin-left: 3px;
 			font-family: Consolas, monospace;
 			font-weight: bold;
@@ -35,7 +36,7 @@
 <body class="notplaying">
 
 <div id="countdown">
-	<p class="intro">We're kicking <strong id="opponent">Barca</strong>'s Ass in </p><p class="time"><span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span></p>
+	<p class="intro">We're kicking <strong id="opponent">Barca</strong>'s Ass in </p><p id="timer"><span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span></p>
 </div>
 
 <div id="ingame">
@@ -74,16 +75,16 @@
 		},
 		V = {
 			els: {
-				'days': 	document.getElementById('days'),
-				'hours': 	document.getElementById('hours'),
-				'minutes': 	document.getElementById('minutes'),
-				'seconds': 	document.getElementById('seconds')
+				'timer': 	document.getElementById('timer')
 			},
 			updateCountdown: function(timeLeft){
-				V.els.days.innerHTML = M.pad( timeLeft.days );
-				V.els.hours.innerHTML = M.pad( timeLeft.hours );
-				V.els.minutes.innerHTML = M.pad( timeLeft.minutes );
-				V.els.seconds.innerHTML = M.pad( timeLeft.seconds );
+				var days = M.pad( timeLeft.days ),
+					hours = M.pad( timeLeft.hours ),
+					minutes = M.pad( timeLeft.minutes ),
+					seconds = M.pad( timeLeft.seconds );
+
+				this.els.timer.innerHTML = 
+				'<p class="time"><span id="days">' + days + '</span><span class="colon">:</span><span id="hours">' + hours +'</span><span class="colon">:</span><span id="minutes">' + minutes + '</span><span class="colon">:</span><span id="seconds">' + seconds + '</span></p>';
 			}
 		},
 		C = {
