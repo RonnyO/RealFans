@@ -3,15 +3,39 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<style>		
+	<style>
+		body {font-family: sans-serif;}
 		.notplaying #ingame, .playing #countdown {display: none;}
 		.playing #ingame, .notplaying #countdown {display: block;}
+		
+		#countdown {
+			font-size: 18px;
+		}
+		
+		#countdown .intro {
+			font-size: 17.5px;
+		}
+		
+		#countdown p {
+			display: inline;
+			margin: 0;
+		}
+		
+		#countdown .time {
+			margin-left: 3px;
+			font-family: Consolas, monospace;
+			font-weight: bold;
+		}
+		
+		#countdown .colon {
+			opacity: 0.6;
+		}
 	</style>
 </head>
 <body class="notplaying">
 
 <div id="countdown">
-	<span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span>
+	<p class="intro">We're kicking <strong id="opponent">Barca</strong>'s Ass in </p><p class="time"><span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span></p>
 </div>
 
 <div id="ingame">
