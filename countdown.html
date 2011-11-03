@@ -32,6 +32,16 @@
 			],
 			strip: function(number){
 				return Math.floor(number);
+			},
+			getDiff: function(now, to){
+				var diff = {};
+				diff.ms = to - now;
+				diff.days = 	this.strip( diff.ms / 1000 / 60 / 60 / 24 );
+				diff.hours = 	this.strip( diff.ms / 1000 / 60 / 60 - (diff.days * 24) );
+				diff.minutes = 	this.strip( diff.ms / 1000 / 60 - 		(diff.days * 24 * 60) - (diff.hours * 60) );
+				diff.seconds = 	this.strip( diff.ms / 1000 - 			(diff.days * 24 * 60 * 60) - (diff.hours * 60 * 60) - (diff.minutes * 60) );
+				
+				return diff;
 			}
 		},
 		V = {
@@ -53,17 +63,6 @@
 				document.location = 'http://google.com';
 			}
 		};
-	
-	M.getDiff = function(now, to){
-		var diff = {};
-		diff.ms = to - now;
-		diff.days = 	M.strip( diff.ms / 1000 / 60 / 60 / 24 );
-		diff.hours = 	M.strip( diff.ms / 1000 / 60 / 60 - (diff.days * 24) );
-		diff.minutes = 	M.strip( diff.ms / 1000 / 60 - 		(diff.days * 24 * 60) - (diff.hours * 60) );
-		diff.seconds = 	M.strip( diff.ms / 1000 - 			(diff.days * 24 * 60 * 60) - (diff.hours * 60 * 60) - (diff.minutes * 60) );
-		
-		return diff;
-	}
 
 	function update(){
 		var diff = M.getDiff( +new Date(), M.gameTimes[0] );
