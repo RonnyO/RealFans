@@ -3,8 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<style>		
+		.notplaying #ingame, .playing #countdown {display: none;}
+		.playing #ingame, .notplaying #countdown {display: block;}
+	</style>
 </head>
-<body>
+<body class="notplaying">
 
 <div id="countdown">
 	<span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span>
@@ -59,14 +63,14 @@
 			}
 		},
 		C = {
-			redirectToGamePage: function(){
-				document.location = 'http://google.com';
+			redirectTo: function(state){
+				document.getElementsByTagName('body')[0].className = state;
 			}
 		};
 
 	function update(){
 		var diff = M.getDiff( +new Date(), M.gameTimes[0] );
-		if(diff.ms <= 0) C.redirectToGamePage();
+		if(diff.ms <= 0) C.redirectTo("playing");
 		
 		V.updateCountdown( diff	);
 	}
