@@ -6,18 +6,53 @@
 </head>
 <body>
 
-<span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span>
+<div id="countdown">
+	<span id="days">00</span><span class="colon">:</span><span id="hours">00</span><span class="colon">:</span><span id="minutes">00</span><span class="colon">:</span><span id="seconds">00</span>
+</div>
+
+<div id="ingame">
+	Current Match: Real Madrid vs. Whatever
+</div>
 
 <script>
-	var M = {}, V = {}, C = {};
-	
-	M.strip = function(number){
-		return Math.floor(number);
-	};
-	
-	M.pad = function(number) {
-		return number < 10 ? '0' + number : number;
-	};
+	var M = {
+			pad: function(number) {
+				return number < 10 ? '0' + number : number;
+			},
+			gameTimes: [
+				+new Date(2011, 11 - 1, 2, 20, 30),
+				+new Date(2011, 11 - 1, 6, 20, 30),
+				+new Date(2011, 11 - 1, 19, 20, 30),
+				+new Date(2011, 11 - 1, 22, 20, 30),
+				+new Date(2011, 11 - 1, 27, 20, 30),
+				+new Date(2011, 12 - 1, 04, 20, 30),
+				+new Date(2011, 12 - 1, 07, 20, 30),
+				+new Date(2011, 12 - 1, 11, 20, 30),
+				+new Date(2011, 12 - 1, 18, 20, 30)
+			],
+			strip: function(number){
+				return Math.floor(number);
+			}
+		},
+		V = {
+			els: {
+				'days': 	document.getElementById('days'),
+				'hours': 	document.getElementById('hours'),
+				'minutes': 	document.getElementById('minutes'),
+				'seconds': 	document.getElementById('seconds')
+			},
+			updateCountdown: function(timeLeft){
+				V.els.days.innerHTML = M.pad( timeLeft.days );
+				V.els.hours.innerHTML = M.pad( timeLeft.hours );
+				V.els.minutes.innerHTML = M.pad( timeLeft.minutes );
+				V.els.seconds.innerHTML = M.pad( timeLeft.seconds );
+			}
+		},
+		C = {
+			redirectToGamePage: function(){
+				document.location = 'http://google.com';
+			}
+		};
 	
 	M.getDiff = function(now, to){
 		var diff = {};
@@ -27,39 +62,8 @@
 		diff.minutes = 	M.strip( diff.ms / 1000 / 60 - 		(diff.days * 24 * 60) - (diff.hours * 60) );
 		diff.seconds = 	M.strip( diff.ms / 1000 - 			(diff.days * 24 * 60 * 60) - (diff.hours * 60 * 60) - (diff.minutes * 60) );
 		
-			
 		return diff;
 	}
-	
-	M.gameTimes = [
-		+new Date(2011, 11 - 1, 2, 20, 30),
-		+new Date(2011, 11 - 1, 6, 20, 30),
-		+new Date(2011, 11 - 1, 19, 20, 30),
-		+new Date(2011, 11 - 1, 22, 20, 30),
-		+new Date(2011, 11 - 1, 27, 20, 30),
-		+new Date(2011, 12 - 1, 04, 20, 30),
-		+new Date(2011, 12 - 1, 07, 20, 30),
-		+new Date(2011, 12 - 1, 11, 20, 30),
-		+new Date(2011, 12 - 1, 18, 20, 30)
-	];
-	
-	C.redirectToGamePage = function(){
-		document.location = 'http://google.com';
-	};
-	
-	V.els = {
-		'days': 	document.getElementById('days'),
-		'hours': 	document.getElementById('hours'),
-		'minutes': 	document.getElementById('minutes'),
-		'seconds': 	document.getElementById('seconds')
-	};
-	
-	V.updateCountdown = function(timeLeft){
-		V.els.days.innerHTML = M.pad( timeLeft.days );
-		V.els.hours.innerHTML = M.pad( timeLeft.hours );
-		V.els.minutes.innerHTML = M.pad( timeLeft.minutes );
-		V.els.seconds.innerHTML = M.pad( timeLeft.seconds );
-	};
 
 	function update(){
 		var diff = M.getDiff( +new Date(), M.gameTimes[0] );
